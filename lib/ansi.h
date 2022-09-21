@@ -1,0 +1,2 @@
+void alternateBuffer();
+void restoreBuffer();
