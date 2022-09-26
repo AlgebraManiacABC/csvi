@@ -1,5 +1,6 @@
 #include "main.h"
-#include "ansi.h"
+#include "modes.h"
+#include "csvi_signal.h"
 
 int main()
 {
@@ -13,6 +14,15 @@ int main()
 		fprintf(stderr, "Input is not from a terminal. Terminating.\n");
 		return -1;
 	}
-	alternateBuffer();
-	restoreBuffer();
+
+	sigHandlerInit();
+
+	win w;
+	getWinsize(&w);
+
+	setTerm(TERM_UNBUFFERED | TERM_ECHO_OFF | TERM_ALT_BUFFER);
+
+	normalMode(w);
+
+	setTerm(TERM_BUFFERED | TERM_ECHO_ON | TERM_OG_BUFFER);
 }

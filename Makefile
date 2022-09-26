@@ -1,13 +1,13 @@
 #The start of any good program is its Makefile! -Luke
 NAME=csvi
 CC=gcc
-CFLAGS=-Wall -Werror -std=c17
+CFLAGS=-Wall -Werror -std=gnu17
 
 SRC_DIR=src
 LIB_DIR=lib
 OBJ_DIR=build
 
-CFLAGS += -I$(LIB_DIR)
+CFLAGS += -I$(LIB_DIR) -lgterm
 
 SRCS=$(wildcard $(SRC_DIR)/*.c)
 #All .c files in SRC_DIR
