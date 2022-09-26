@@ -33,5 +33,19 @@ void sigTermHandler()
 
 void sigWinchHandler()
 {
-	printf("Window size changed!\n");
+	isWinch(WC_SET);
+}
+
+bool isWinch(bool set)
+{
+	static bool winch = false;
+	bool query = false;
+	if(set == WC_SET)
+		winch = true;
+	else
+	{
+		query = winch;
+		if(winch) winch = false;
+	}
+	return query;
 }

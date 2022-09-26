@@ -22,7 +22,7 @@ int main()
 
 	setTerm(TERM_UNBUFFERED | TERM_ECHO_OFF | TERM_ALT_BUFFER);
 
-	normalMode(w);
+	normalMode(&w);
 
 	setTerm(TERM_BUFFERED | TERM_ECHO_ON | TERM_OG_BUFFER);
 }

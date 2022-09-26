@@ -2,7 +2,8 @@
  * TODO:
  * 
  *  Handle:
- *  - SIGSTOP/SIGCONT
+ *  - SIGSTOP/SIGCONT?
+ *  - SIGQUIT?
  *  - ???
  * 
  */
@@ -10,6 +11,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <signal.h>
+#include <stdbool.h>
+
+#define WC_SET true
+#define WC_QUERY false
 
 /**
  * Initializes all signal-related functions:
@@ -36,3 +41,10 @@ void sigTermHandler();
  * 
  */
 void sigWinchHandler();
+
+/**
+ * Is alerted to window size changes. Query this function to tell if the window size has been changed. 
+ * 
+ * @param q whether the function should be reset (WC_QUERY or WC_SET)
+ */
+bool isWinch(bool q);

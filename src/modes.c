@@ -1,14 +1,19 @@
 #include "modes.h"
-#include <stdbool.h>
 
-void normalMode(win w)
+void normalMode(win *w)
 {
 	bool normal = true;
 	while(normal)
 	{
-		while(!kbhit())
+		while(kbhit())
 		{
+			if(getchar()=='q')
+				normal = false;
 		}
-		normal = false;
+		if(isWinch(WC_QUERY))
+		{
+			getWinsize(w);
+			printf("Window size changed to [%d,%d]\n",w->ws_row,w->ws_col);
+		}
 	}
 }

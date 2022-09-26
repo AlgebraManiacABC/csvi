@@ -1,4 +1,5 @@
 #include <gterm.h>
-#include <signal.h>
+#include <stdbool.h>
+#include "csvi_signal.h"
 
-void normalMode(win);
+void normalMode(win*);
