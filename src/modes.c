@@ -3,6 +3,7 @@
 void normalMode(win *w)
 {
 	bool normal = true;
+	raise(SIGWINCH);
 	while(normal)
 	{
 		while(kbhit())
@@ -13,7 +14,10 @@ void normalMode(win *w)
 		if(isWinch(WC_QUERY))
 		{
 			getWinsize(w);
-			printf("Window size changed to [%d,%d]\n",w->ws_row,w->ws_col);
+			if(winsizeRequirementsMet(*w))
+				printCellBorders(*w);
+			else
+				printError(*w);
 		}
 	}
 }

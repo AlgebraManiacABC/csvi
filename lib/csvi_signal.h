@@ -8,10 +8,7 @@
  * 
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <signal.h>
-#include <stdbool.h>
+#include "main.h"
 
 #define WC_SET true
 #define WC_QUERY false

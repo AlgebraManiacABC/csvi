@@ -5,3 +5,5 @@
 #include <ctype.h>
 #include <string.h>
 #include <gterm.h>
+#include <color.h>
+#include <signal.h>
