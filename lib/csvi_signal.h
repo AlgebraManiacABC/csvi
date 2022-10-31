@@ -2,7 +2,7 @@
  * TODO:
  * 
  *  Handle:
- *  - SIGSTOP/SIGCONT?
+ *  - SIGSTOP/SIGCONT? (not sure I *can* handle these...
  *  - SIGQUIT?
  *  - ???
  * 
@@ -40,8 +40,7 @@ void sigTermHandler();
 void sigWinchHandler();
 
 /**
- * Is alerted to window size changes. Query this function to tell if the window size has been changed. 
+ * Is alerted to window size changes. Becomes true when a window size change is detected. Should be set to false after use.
  * 
- * @param q whether the function should be reset (WC_QUERY or WC_SET)
  */
-bool isWinch(bool q);
+extern bool isWinch;

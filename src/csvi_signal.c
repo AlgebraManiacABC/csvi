@@ -1,5 +1,7 @@
 #include "csvi_signal.h"
 
+bool isWinch;
+
 int sigHandlerInit()
 {
 	struct sigaction new;
@@ -33,19 +35,5 @@ void sigTermHandler()
 
 void sigWinchHandler()
 {
-	isWinch(WC_SET);
-}
-
-bool isWinch(bool set)
-{
-	static bool winch = false;
-	bool query = false;
-	if(set == WC_SET)
-		winch = true;
-	else
-	{
-		query = winch;
-		if(winch) winch = false;
-	}
-	return query;
+	isWinch = true;
 }
