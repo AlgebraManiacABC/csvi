@@ -1,4 +1,6 @@
-csvi
+csv*
 *.txt
 build*
 .vscode*
+old*
+test*

@@ -2,6 +2,7 @@
 #include "modes.h"
 #include "csvi_signal.h"
 #include "print.h"
+#include "doc.h"
 
 int main()
 {
@@ -17,10 +18,14 @@ int main()
 	}
 
 	win w;
-	getWinsize(&w);
-	if(w.ws_col < MIN_COLUMNS || w.ws_row < MIN_ROWS)
+	if(getWinsize(&w))
 	{
-		fprintf(stderr, "Terminal is not large enough to run csvi!\nMust have at least 3 rows and 11 columns.\n");
+		fprintf(stderr, "Could not get terminal size. Aborting.\n");
+		return EXIT_FAILURE;
+	}
+	if(!winsizeRequirementsMet(w))
+	{
+		fprintf(stderr, "Terminal is not large enough to run csvi!\nMust have at least %d rows and %d columns.\n",MIN_ROWS,MIN_COLUMNS);
 		return EXIT_FAILURE;
 	}
 
@@ -28,8 +33,13 @@ int main()
 	sigHandlerInit();
 
 	setTerm(TERM_UNBUFFERED | TERM_ECHO_OFF | TERM_ALT_BUFFER | TERM_CURSOR_OFF);
+	
+	viewport v;
+	v.x = 0;
+	v.y = 0;
+	resizeViewport(w, &v);
 
-	normalMode(&w);
+	normalMode(&w, &v);
 
 	setTerm(TERM_BUFFERED | TERM_ECHO_ON | TERM_OG_BUFFER | TERM_CURSOR_ON);
 

@@ -16,17 +16,21 @@ OBJ_BASE=$(SRCS:%.c=%.o)
 OBJS=$(OBJ_BASE:$(SRC_DIR)%=$(OBJ_DIR)%)
 #Replace SRC_DIR with OBJ_DIR in OBJ_BASE(above)
 #Gets all SRC_DIR/*.c files and turns them into OBJ_DIR/*.o files
+LIBS=$(wildcard $(LIB_DIR)/*.h)
 
 $(NAME): $(OBJS)
 	$(CC) -o $@ $^ $(CFLAGS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(LIBS) | $(OBJ_DIR)
-	$(CC) -o $@ -c $^ $(CFLAGS)
+	$(CC) -o $@ -c $< $(CFLAGS)
 
 $(OBJ_DIR):
 	mkdir -p $@
 
-.PHONY: clean
+.PHONY: clean test
+
+test:
+	echo $(LIBS)
 
 clean:
 	rm -rf $(OBJ_DIR)
